@@ -1,0 +1,93 @@
+1) Write a SQL statement to create a table named jobs including columns job_id,
+   job_title, min_salary, max_salary and check whether the max_salary should  be greater than  8000.
+
+
+solution:-
+
+show databases;
++--------------------+
+| Database           |
++--------------------+
+| ash                |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+
+create database ashdb;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use ashdb;
+Database changed
+
+
+
+ create table jobs(job_id varchar(255),job_title varchar(50),min_salary int,max_salary int);
+Query OK, 0 rows affected (0.02 sec)
+ desc table jobs;
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | jobs  | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    1 |   100.00 | NULL  |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+
+
+insert into jobs(job_id,job_title,min_salary,max_salary) values('AD_PRES','President',20000,40000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into jobs(job_id,job_title,min_salary,max_salary) values('AD_VP','Administration Vice President',15000,30000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into jobs(job_id,job_title,min_salary,max_salary) values('AD_ASST','Administration Assistant',3000,6000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into jobs(job_id,job_title,min_salary,max_salary) values('FI_MGR','Finance Manager', 8200,16000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into jobs(job_id,job_title,min_salary,max_salary) values('FI_ACCOUNT','Accountant',4200,9000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into jobs(job_id,job_title,min_salary,max_salary) values('AC_MGR','Accounting Manager',8200,16000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into jobs(job_id,job_title,min_salary,max_salary) values('AC_ACCOUNT','Public Accountant',4200,9000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into jobs(job_id,job_title,min_salary,max_salary) values('SA_MAN','Sales Manager',10000,20000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into jobs(job_id,job_title,min_salary,max_salary) values('IT_PROG','Programmer',4000,10000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into jobs(job_id,job_title,min_salary,max_salary) values('PR_REP','Public Relations Representative',4500, 10500);
+Query OK, 1 row affected (0.01 sec)
+
+
+ select * from jobs;
++------------+---------------------------------+------------+------------+
+| job_id     | job_title                       | min_salary | max_salary |
++------------+---------------------------------+------------+------------+
+| AD_PRES    | President                       |      20000 |      40000 |
+| AD_VP      | Administration Vice President   |      15000 |      30000 |
+| AD_ASST    | Administration Assistant        |       3000 |       6000 |
+| FI_MGR     | Finance Manager                 |       8200 |      16000 |
+| FI_ACCOUNT | Accountant                      |       4200 |       9000 |
+| AC_MGR     | Accounting Manager              |       8200 |      16000 |
+| AC_ACCOUNT | Public Accountant               |       4200 |       9000 |
+| SA_MAN     | Sales Manager                   |      10000 |      20000 |
+| IT_PROG    | Programmer                      |       4000 |      10000 |
+| PR_REP     | Public Relations Representative |       4500 |      10500 |
++------------+---------------------------------+------------+------------+
+
+
+ select MAX(max_salary)
+    -> from(jobs)
+    -> where max_salary >8000;
++-----------------+
+| MAX(max_salary) |
++-----------------+
+|           40000 |
++-----------------+
